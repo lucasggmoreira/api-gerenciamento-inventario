@@ -1,20 +1,22 @@
-package me.lucasggmoreira.controladores;
+package me.lucasggmoreira.controllers.produtos;
 
+import me.lucasggmoreira.api.Repositorio;
 import me.lucasggmoreira.exceptions.ProdutoExistenteException;
 import me.lucasggmoreira.exceptions.ValorInvalidoException;
 import me.lucasggmoreira.exceptions.ValorNuloException;
-import me.lucasggmoreira.modelos.Produto;
-import me.lucasggmoreira.InventarioProdutos.Repositorio;
-import org.springframework.beans.factory.annotation.Autowired;
+import me.lucasggmoreira.models.Produto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/produtos")
-public class ControladorProdutos {
+public class ControladorGeral {
 
-    @Autowired
-    private Repositorio repositorio;
+    private final Repositorio repositorio;
+
+    public ControladorGeral(Repositorio repositorio) {
+        this.repositorio = repositorio;
+    }
 
     @PostMapping
     public ResponseEntity<String> cadastrarProduto(@RequestBody Produto json){
@@ -22,7 +24,7 @@ public class ControladorProdutos {
             Produto produto = new Produto(json, repositorio);
             repositorio.save(produto);
             return ResponseEntity.ok("Produto cadastrado!");
-        } catch (ProdutoExistenteException  | ValorInvalidoException  | ValorNuloException e){
+        } catch (ProdutoExistenteException  | ValorInvalidoException  | ValorNuloException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -32,5 +34,8 @@ public class ControladorProdutos {
         Iterable<Produto> produtos = repositorio.findAll();
         return ResponseEntity.ok(produtos);
     }
+
+
+
 
 }

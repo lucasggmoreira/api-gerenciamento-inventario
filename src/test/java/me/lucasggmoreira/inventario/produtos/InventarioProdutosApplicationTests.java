@@ -1,4 +1,4 @@
-package me.lucasggmoreira.InventarioProdutos;
+package me.lucasggmoreira.inventario.produtos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

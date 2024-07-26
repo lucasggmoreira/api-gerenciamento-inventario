@@ -1,6 +1,6 @@
-package me.lucasggmoreira.InventarioProdutos;
+package me.lucasggmoreira.api;
 
-import me.lucasggmoreira.modelos.Produto;
+import me.lucasggmoreira.models.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

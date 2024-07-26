@@ -1,4 +1,4 @@
-package me.lucasggmoreira.modelos;
+package me.lucasggmoreira.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-import me.lucasggmoreira.InventarioProdutos.Repositorio;
+import me.lucasggmoreira.api.Repositorio;
 import me.lucasggmoreira.exceptions.ProdutoExistenteException;
 import me.lucasggmoreira.exceptions.ValorInvalidoException;
 import me.lucasggmoreira.exceptions.ValorNuloException;
@@ -16,9 +16,8 @@ import me.lucasggmoreira.exceptions.ValorNuloException;
 @Entity
 public class Produto {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String nome;
@@ -28,17 +27,6 @@ public class Produto {
     private int quantidade;
 
     public Produto() {
-    }
-
-    public Produto(Long id, Produto produto, Repositorio repositorio) {
-        if (!nomeEValido(produto)) {
-            throw new ValorNuloException("O nome não pode estar vazio!");
-        }
-        validarEstoque(produto);
-        this.id = id;
-        this.preco = produto.getPreco();
-        this.nome = produto.getNome();
-        this.quantidade = produto.getQuantidade();
     }
 
     public Produto(Produto produto, Repositorio repositorio) {
