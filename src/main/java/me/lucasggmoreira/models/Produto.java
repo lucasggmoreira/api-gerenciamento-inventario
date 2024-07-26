@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-import me.lucasggmoreira.api.Repositorio;
+import me.lucasggmoreira.repository.Repositorio;
 import me.lucasggmoreira.exceptions.ProdutoExistenteException;
 import me.lucasggmoreira.exceptions.ValorInvalidoException;
 import me.lucasggmoreira.exceptions.ValorNuloException;

@@ -1,6 +1,6 @@
-package me.lucasggmoreira.controllers.produtos;
+package me.lucasggmoreira.controllers;
 
-import me.lucasggmoreira.api.Repositorio;
+import me.lucasggmoreira.repository.Repositorio;
 import me.lucasggmoreira.exceptions.ProdutoExistenteException;
 import me.lucasggmoreira.exceptions.ProdutoNaoEncontradoException;
 import me.lucasggmoreira.exceptions.ValorInvalidoException;
