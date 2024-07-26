@@ -6,6 +6,7 @@ import me.lucasggmoreira.exceptions.ProdutoNaoEncontradoException;
 import me.lucasggmoreira.exceptions.ValorInvalidoException;
 import me.lucasggmoreira.exceptions.ValorNuloException;
 import me.lucasggmoreira.models.Produto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/produtos/{id}")
 public class ControladorIndividual {
 
-    private final Repositorio repositorio;
-
-    public ControladorIndividual(Repositorio repositorio) {
-        this.repositorio = repositorio;
-    }
+    @Autowired
+    private Repositorio repositorio;
 
     @PutMapping
     public ResponseEntity<String> modificarProduto(@PathVariable long id, @RequestBody Produto json){
@@ -71,6 +69,22 @@ public class ControladorIndividual {
             produto.setQuantidade(json.getQuantidade());
             repositorio.save(produto);
             return ResponseEntity.ok("Estoque do produto atualizado!");
+        } catch (ValorInvalidoException | ValorNuloException |
+                 ProdutoNaoEncontradoException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PatchMapping("/preco")
+    public ResponseEntity<String> modificarPrecoProduto(@PathVariable long id, @RequestBody Produto json){
+        try {
+            if(repositorio.findById(id).isEmpty()){
+                throw new ProdutoNaoEncontradoException("Produto não encontrado!");
+            }
+            Produto produto = repositorio.findById(id).get();
+            produto.setPreco(json.getPreco());
+            repositorio.save(produto);
+            return ResponseEntity.ok("Preco do produto atualizado!");
         } catch (ValorInvalidoException | ValorNuloException |
                  ProdutoNaoEncontradoException e){
             return ResponseEntity.badRequest().body(e.getMessage());

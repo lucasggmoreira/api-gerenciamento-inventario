@@ -5,6 +5,7 @@ import me.lucasggmoreira.exceptions.ProdutoExistenteException;
 import me.lucasggmoreira.exceptions.ValorInvalidoException;
 import me.lucasggmoreira.exceptions.ValorNuloException;
 import me.lucasggmoreira.models.Produto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/produtos")
 public class ControladorGeral {
 
-    private final Repositorio repositorio;
-
-    public ControladorGeral(Repositorio repositorio) {
-        this.repositorio = repositorio;
-    }
+    @Autowired
+    private Repositorio repositorio;
 
     @PostMapping
     public ResponseEntity<String> cadastrarProduto(@RequestBody Produto json){
