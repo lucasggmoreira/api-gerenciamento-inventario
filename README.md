@@ -44,9 +44,9 @@ Este repositório contém uma API RESTful desenvolvida em Java utilizando Spring
   - Exemplo de Request Body:
     ```json
     {
-      "nome": "Produto Teste",
-      "descricao": "Descrição do produto",
-      "preco": 100.0
+       "nome": "Salsicha",
+       "quantidade": 3,
+       "preco": 12.50
     }
     ```
 
@@ -55,9 +55,9 @@ Este repositório contém uma API RESTful desenvolvida em Java utilizando Spring
   - Exemplo de Request Body:
     ```json
     {
-      "nome": "Produto Atualizado",
-      "descricao": "Descrição atualizada",
-      "preco": 150.0
+       "nome": "Salsicha",
+       "quantidade": 10,
+       "preco": 22.50
     }
     ```
 
