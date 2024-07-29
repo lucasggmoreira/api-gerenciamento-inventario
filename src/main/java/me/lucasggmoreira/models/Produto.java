@@ -30,12 +30,8 @@ public class Produto {
     }
 
     public Produto(Produto produto, Repositorio repositorio) {
-        if (!nomeEValido(produto)) {
-            throw new ValorNuloException("O nome não pode estar vazio!");
-        }
-        if (nomeJaExiste(produto, repositorio)){
-            throw new ProdutoExistenteException("Produto ja existe no estoque!");
-        }
+        if (!nomeEValido(produto)) throw new ValorNuloException("O nome não pode estar vazio!");
+        if (nomeJaExiste(produto, repositorio)) throw new ProdutoExistenteException("Produto ja existe no estoque!");
         validarEstoque(produto);
         this.preco = produto.getPreco();
         this.nome = produto.getNome();
@@ -61,21 +57,14 @@ public class Produto {
 
     private boolean nomeJaExiste(Produto produto, Repositorio repositorio) {
         for (int i = 0; i < repositorio.findAll().size(); i++) {
-            if (repositorio.findAll().get(i).nome.equalsIgnoreCase(produto.getNome())) {
-                return true;
-            }
+            if (repositorio.findAll().get(i).nome.equalsIgnoreCase(produto.getNome())) return true;
         }
         return false;
     }
 
     private void validarEstoque(Produto produto){
-        if (produto.preco == 0) {
-            throw new ValorInvalidoException("O preço não pode ser gratuito!");
-        } else if (produto.preco < 0) {
-            throw new ValorInvalidoException("O preço não pode ser negativo!");
-        }
-        if (produto.getQuantidade() < 0) {
-            throw new ValorInvalidoException("A quantidade de estoque não pode ser negativa!");
-        }
+        if (produto.preco == 0) throw new ValorInvalidoException("O preço não pode ser gratuito!");
+        else if (produto.preco < 0) throw new ValorInvalidoException("O preço não pode ser negativo!");
+        if (produto.getQuantidade() < 0) throw new ValorInvalidoException("A quantidade de estoque não pode ser negativa!");
     }
 }

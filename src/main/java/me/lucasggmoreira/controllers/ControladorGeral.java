@@ -28,8 +28,9 @@ public class ControladorGeral {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Produto>> listarProdutos(){
+    public ResponseEntity listarProdutos(){
         Iterable<Produto> produtos = repositorio.findAll();
+        if (repositorio.findAll().isEmpty()) return ResponseEntity.badRequest().body("O banco de dados está vazio!");
         return ResponseEntity.ok(produtos);
     }
 

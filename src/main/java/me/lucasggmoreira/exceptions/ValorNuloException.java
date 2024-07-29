@@ -1,7 +1,7 @@
 package me.lucasggmoreira.exceptions;
 
 public class ValorNuloException extends RuntimeException{
-    private String message;
+    private final String message;
 
     public ValorNuloException(String message) {
         this.message = message;
