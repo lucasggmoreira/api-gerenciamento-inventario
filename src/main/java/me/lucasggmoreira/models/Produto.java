@@ -40,7 +40,8 @@ public class Produto {
 
     public void alterarDados(Produto produto, Long id, Repositorio repositorio) {
         for (int i = 0; i < repositorio.findAll().size(); i++) {
-            if (repositorio.findAll().get(i).getNome().equalsIgnoreCase(produto.getNome()) && (!id.equals(produto.getId()))){
+            Produto produtoAlvo = repositorio.findAll().get(i);
+            if (produtoAlvo.getNome().equalsIgnoreCase(produto.getNome()) && !id.equals(produtoAlvo.getId())){
                 throw new ProdutoExistenteException("Outro produto ja tem esse nome!");
             }
         }
