@@ -1,4 +1,3 @@
-
 # API de Gerenciamento de Inventário
 
 Este repositório contém uma API RESTful desenvolvida em Java utilizando Spring Boot para gerenciar o inventário de produtos de um banco de dados.
@@ -6,7 +5,6 @@ Este repositório contém uma API RESTful desenvolvida em Java utilizando Spring
 ## Funcionalidades
 
 - Adicionar, atualizar, deletar e buscar produtos
-- Atualizar quantidade em estoque de produtos
 
 ## Tecnologias Utilizadas
 
@@ -14,6 +12,7 @@ Este repositório contém uma API RESTful desenvolvida em Java utilizando Spring
 - **Spring Boot**: Framework para criação da aplicação.
 - **Spring Data JPA**: Framework para persistência de dados.
 - **H2 Database**: Banco de dados para testes.
+- **Flyway**: Ferramenta para migração de banco de dados.
 - **Maven**: Gerenciador de dependências e build.
 
 ## Como Executar o Projeto
@@ -33,67 +32,55 @@ Este repositório contém uma API RESTful desenvolvida em Java utilizando Spring
    mvn spring-boot:run
    ```
 
-4. A API estará disponível em `http://localhost:8081`.
+4. A API estará disponível em `http://localhost:8080`.
 
 ## Endpoints
 
-### Produtos
-
 - **Adicionar um novo produto**
   - `POST /produtos`
+    - **nome**: Obrigatório (String)
+    - **preco**: Opcional (padrão: `0.0`)
+    - **quantidade**: Opcional (padrão: `0`)
+  
   - Exemplo de Request Body:
     ```json
     {
        "nome": "Salsicha",
-       "quantidade": 3,
-       "preco": 12.50
+       "preco": 12.50,
+       "quantidade": 3
     }
     ```
 
+- **Buscar informações sobre os produtos**
+  - `GET /produtos`
+
+
+- **Buscar informações sobre um produto específico**
+  - `GET /produtos/{id}`
+
+
 - **Atualizar informações de um produto**
   - `PUT /produtos/{id}`
+
   - Exemplo de Request Body:
     ```json
     {
        "nome": "Salsicha",
-       "quantidade": 10,
-       "preco": 22.50
+       "preco": 22.50,
+       "quantidade": 10
     }
     ```
 
 - **Deletar um produto**
   - `DELETE /produtos/{id}`
 
-- **Buscar informações sobre produtos**
-  - `GET /produtos`
 
-- **Buscar informações sobre um produto específico**
-  - `GET /produtos/{id}`
-
-- **Atualizar quantidade em estoque de um produto**
-  - `PATCH /produtos/{id}/estoque`
-  - Exemplo de Request Body:
-    ```json
-    {
-      "quantidade": 50
-    }
-    ```
-
-- **Atualizar o preço de um produto**
-  - `PATCH /produtos/{id}/preco`
-  - Exemplo de Request Body:
-    ```json
-    {
-      "preco": 25.50
-    }
-    ```
 
 ## Estrutura do Projeto
 
 - **controllers**: Define os endpoints da API.
-- **exceptions**: Contém exceções personalizadas.
-- **repository**: Interage com o banco de dados.
-- **models**: Define as entidades do banco de dados.
+- **domain**: Define os modelos do projeto e as entidades do banco de dados.
+- **infra**: Contém tratamento de Exceptions e outras funções do projeto.
 
 ## Contribuição
 
